@@ -1,153 +1,66 @@
-import React, { useCallback, useState } from 'react';
-import {
-  DataGrid, Column, Editing, Scrolling, Lookup, Summary, TotalItem, DataGridTypes,
+import React from 'react';
+import DataGrid, {
+  Column,
+  Editing,
+  Popup,
+  Paging,
+  Lookup,
+  Form,
 } from 'devextreme-react/data-grid';
-import { Button } from 'devextreme-react/button';
-import { SelectBox, SelectBoxTypes } from 'devextreme-react/select-box';
+import 'devextreme-react/text-area';
+import { Item } from 'devextreme-react/form';
+import { employees, states } from './dados.ts';
 
-import CustomStore from 'devextreme/data/custom_store';
-import { formatDate } from 'devextreme/localization';
-import 'whatwg-fetch';
+const notesEditorOptions = { height: 100 };
 
-const refreshModeLabel = { 'aria-label': 'Refresh Mode' };
-const URL = 'https://js.devexpress.com/Demos/Mvc/api/DataGridWebApi';
+const TestCrud = () => (
+  <div id="data-grid-demo">
+    <DataGrid
+      dataSource={employees}
+      keyExpr="ID"
+      showBorders={true}
+    >
+      <Paging enabled={false} />
+      <Editing
+        mode="popup"
+        allowUpdating={true}
+        allowAdding={true}
+        allowDeleting={true}>
+        <Popup title="Employee Info" showTitle={true} width={700} height={525} />
+        <Form>
+          <Item itemType="group" colCount={2} colSpan={2}>
+            <Item dataField="FirstName" />
+            <Item dataField="LastName" />
+            <Item dataField="Prefix" />
+            <Item dataField="BirthDate" />
+            <Item dataField="Position" />
+            <Item dataField="HireDate" />
+            <Item
+              dataField="Notes"
+              editorType="dxTextArea"
+              colSpan={2}
+              editorOptions={notesEditorOptions} />
+          </Item>
 
-const REFRESH_MODES = ['full', 'reshape', 'repaint'];
-
-const TestCrud = () => {
-  const [ordersData] = useState(new CustomStore({
-    key: 'OrderID',
-    load: () => sendRequest(`${URL}/Orders`),
-    insert: (values) => sendRequest(`${URL}/InsertOrder`, 'POST', {
-      values: JSON.stringify(values),
-    }),
-    update: (key, values) => sendRequest(`${URL}/UpdateOrder`, 'PUT', {
-      key,
-      values: JSON.stringify(values),
-    }),
-    remove: (key) => sendRequest(`${URL}/DeleteOrder`, 'DELETE', {
-      key,
-    }),
-  }));
-  const [customersData] = useState(new CustomStore({
-    key: 'Value',
-    loadMode: 'raw',
-    load: () => sendRequest(`${URL}/CustomersLookup`),
-  }));
-  const [shippersData] = useState(new CustomStore({
-    key: 'Value',
-    loadMode: 'raw',
-    load: () => sendRequest(`${URL}/ShippersLookup`),
-  }));
-
-  const [requests, setRequests] = useState([]);
-  const [refreshMode, setRefreshMode] = useState<DataGridTypes.GridsEditRefreshMode>('reshape');
-
-  const handleRefreshModeChange = useCallback((e: SelectBoxTypes.ValueChangedEvent) => {
-    setRefreshMode(e.value);
-  }, []);
-
-  const clearRequests = useCallback(() => {
-    setRequests([]);
-  }, []);
-
-  const logRequest = useCallback((method, url: string, data: Record<string, any>) => {
-    const args = Object.keys(data || {}).map((key) => `${key}=${data[key]}`).join(' ');
-
-    const time = formatDate(new Date(), 'HH:mm:ss');
-    const request = [time, method, url.slice(URL.length), args].join(' ');
-
-    setRequests((prevRequests: ConcatArray<string>) => [request].concat(prevRequests));
-  }, []);
-
-  const sendRequest = useCallback(async (url: string, method = 'GET', data = {}) => {
-    logRequest(method, url, data);
-
-    const request: RequestInit = {
-      method, credentials: 'include',
-    };
-
-    if (['DELETE', 'POST', 'PUT'].includes(method)) {
-      const params = Object.keys(data)
-        .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-        .join('&');
-
-      request.body = params;
-      request.headers = { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' };
-    }
-
-    const response = await fetch(url, request);
-
-    const isJson = response.headers.get('content-type')?.includes('application/json');
-    const result = isJson ? await response.json() : {};
-
-    if (!response.ok) {
-      throw result.Message;
-    }
-
-    return method === 'GET' ? result.data : {};
-  }, [logRequest]);
-
-  return (
-    <React.Fragment>
-      <DataGrid
-        id="grid"
-        showBorders={true}
-        dataSource={ordersData}
-        repaintChangesOnly={true}
-      >
-        <Editing
-          refreshMode={refreshMode}
-          mode="cell"
-          allowAdding={true}
-          allowDeleting={true}
-          allowUpdating={true}
-        />
-
-        <Scrolling mode="virtual" />
-
-        <Column dataField="CustomerID" caption="Customer">
-          <Lookup dataSource={customersData} valueExpr="Value" displayExpr="Text" />
-        </Column>
-        <Column dataField="OrderDate" dataType="date" />
-        <Column dataField="Freight" />
-        <Column dataField="ShipCountry" />
-        <Column
-          dataField="ShipVia"
-          caption="Shipping Company"
-          dataType="number"
-        >
-          <Lookup dataSource={shippersData} valueExpr="Value" displayExpr="Text" />
-        </Column>
-
-        <Summary>
-          <TotalItem column="CustomerID" summaryType="count" />
-          <TotalItem column="Freight" summaryType="sum" valueFormat="#0.00" />
-        </Summary>
-      </DataGrid>
-      <div className="options">
-        <div className="caption">Options</div>
-        <div className="option">
-          <span>Refresh Mode: </span>
-          <SelectBox
-            value={refreshMode}
-            inputAttr={refreshModeLabel}
-            items={REFRESH_MODES}
-            onValueChanged={handleRefreshModeChange}
-          />
-        </div>
-        <div id="requests">
-          <div>
-            <div className="caption">Network Requests</div>
-            <Button id="clear" text="Clear" onClick={clearRequests} />
-          </div>
-          <ul>
-            {requests.map((request, index) => <li key={index}>{request}</li>)}
-          </ul>
-        </div>
-      </div>
-    </React.Fragment>
-  );
-};
+          <Item itemType="group" caption="Home Address" colCount={2} colSpan={2}>
+            <Item dataField="StateID" />
+            <Item dataField="Address" />
+          </Item>
+        </Form>
+      </Editing>
+      <Column dataField="Prefix" caption="Title" width={70} />
+      <Column dataField="FirstName" />
+      <Column dataField="LastName" />
+      <Column dataField="BirthDate" dataType="date" />
+      <Column dataField="Position" width={170} />
+      <Column dataField="HireDate" dataType="date" />
+      <Column dataField="StateID" caption="State" width={125}>
+        <Lookup dataSource={states} valueExpr="ID" displayExpr="Name" />
+      </Column>
+      <Column dataField="Address" visible={false} />
+      <Column dataField="Notes" visible={false} />
+    </DataGrid>
+  </div>
+);
 
 export default TestCrud;

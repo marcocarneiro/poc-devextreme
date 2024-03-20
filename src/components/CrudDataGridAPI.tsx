@@ -43,19 +43,52 @@ const Estilo = styled.div`
 }
 `
 
-const handleErrors = (response: Response): Response =>{
-    if (!response.ok)
-        throw new Error(response.statusText)
-    return response
-}
+import CustomStore from 'devextreme/data/custom_store'
+import DataSource from 'devextreme/data/data_source'
+import 'whatwg-fetch'
 
-const url = 'https://jsonplaceholder.typicode.com/comments/'
-const dataSource = createStore(
+//const url = 'https://jsonplaceholder.typicode.com/comments/'
+/* const dataSource = createStore(
     {
         key: 'id',
         loadUrl: url,
     }
-)
+) */
+const URL = 'https://jsonplaceholder.typicode.com/posts/1/comments'
+
+function isNotEmpty(value: string | undefined | null) {
+    return value !== undefined && value !== null && value !== '';
+  }
+  
+  const datasource = new CustomStore({
+    key: 'OrderNumber',
+    async load(loadOptions) {
+      const paramNames = [
+        'skip', 'take', 'requireTotalCount', 'requireGroupCount',
+        'sort', 'filter', 'totalSummary', 'group', 'groupSummary',
+      ];
+  
+      const queryString = paramNames
+        .filter((paramName) => isNotEmpty(loadOptions[paramName]))
+        .map((paramName) => `${paramName}=${JSON.stringify(loadOptions[paramName])}`)
+        .join('&');
+  
+      try {
+        const response = await fetch(`https://js.devexpress.com/Demos/WidgetsGalleryDataService/api/orders?${queryString}`);
+  
+        const result = await response.json();
+  
+        return {
+          data: result.data,
+          totalCount: result.totalCount,
+          summary: result.summary,
+          groupCount: result.groupCount,
+        };
+      } catch (err) {
+        throw new Error('Data Loading Error');
+      }
+    },
+  });
 
 const notesEditorOptions = { height: 100 };
 
@@ -63,8 +96,8 @@ const CrudDataGridAPI = () => (
   <div id="data-grid-demo">
     <Estilo>
       <DataGrid
-        dataSource={dataSource}
-        keyExpr="id"
+        dataSource={datasource}
+        //keyExpr="id"
         showBorders={true}
       >
         <Paging enabled={false} />
@@ -76,10 +109,12 @@ const CrudDataGridAPI = () => (
           <Popup title="Comentários" showTitle={true} width={700} height={525} />
           <Form>
             <Item itemType="group" colCount={2} colSpan={2}>
-              <Item dataField="postId" />
-              <Item dataField="id" />
-              <Item dataField="name" />
-              <Item dataField="email" />
+              <Item dataField="OrderNumber" />
+              <Item dataField="OrderDate" />
+              <Item dataField="StoreCity" />
+              <Item dataField="StoreState" />
+              <Item dataField="Employee" />
+              <Item dataField="SaleAmount" />
               <Item
                 dataField="body"
                 editorType="dxTextArea"
@@ -88,11 +123,31 @@ const CrudDataGridAPI = () => (
             </Item>
           </Form>
         </Editing>
-        <Column dataField="postId"  />
-        <Column dataField="id" />
-        <Column dataField="name" />
-        <Column dataField="email" />
-        <Column dataField="body" />
+        <Column
+      dataField="OrderNumber"
+      dataType="number"
+    />
+    <Column
+      dataField="OrderDate"
+      dataType="date"
+    />
+    <Column
+      dataField="StoreCity"
+      dataType="string"
+    />
+    <Column
+      dataField="StoreState"
+      dataType="string"
+    />
+    <Column
+      dataField="Employee"
+      dataType="string"
+    />
+    <Column
+      dataField="SaleAmount"
+      dataType="number"
+      format="currency"
+    />
       </DataGrid>
     </Estilo>
   </div>

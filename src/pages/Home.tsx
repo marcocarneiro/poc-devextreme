@@ -9,7 +9,7 @@ import TestCrud from '../components/TestCrud'
 const Home = (): JSX.Element => {
     return (
         <>
-            <TestCrud />
+            <CrudDataGridAPI />
         </>        
     )
 }
