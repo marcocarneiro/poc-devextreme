@@ -12,6 +12,7 @@
 - EDIÇÃO EM POPUP:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/PopupEditing/MaterialBlueLight/
 
 ## Recursos para API JSON:
+- https://medium.com/code-prestige/mockando-apis-rest-facilmente-com-o-mockapi-48f03a78aaca
 - https://mockend.com/
 - https://jsonplaceholder.typicode.com/
 
