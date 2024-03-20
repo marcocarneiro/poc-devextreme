@@ -7,11 +7,10 @@ import DataGrid, {
   Lookup,
   Form,
 } from 'devextreme-react/data-grid'
+import { createStore } from 'devextreme-aspnet-data-nojquery'
 import 'devextreme-react/text-area'
 import { Item } from 'devextreme-react/form'
 import styled from '@emotion/styled'
-
-import { clientes, states } from './dados.ts'
 
 //Pacotes de tradução
 import ptMessages from "devextreme/localization/messages/pt.json"
@@ -44,14 +43,43 @@ const Estilo = styled.div`
 }
 `
 
+const handleErrors = (response: Response): Response =>{
+    if (!response.ok)
+        throw new Error(response.statusText)
+    return response
+}
+/* function handleErrors(response: Response): Response {
+    if (!response.ok)
+        throw new Error(response.statusText);
+    return response;
+} */
+
+const url = 'https://jsonplaceholder.typicode.com/comments/'
+const dataSource = createStore(
+    {
+        key: 'id',
+        loadUrl: url,
+        insert: (values) => {
+            return fetch("https://mydomain.com/MyDataService/myEntity", {
+                method: "POST",
+                body: JSON.stringify(values),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(handleErrors);
+        }
+    }
+)
+
 const notesEditorOptions = { height: 100 };
 
-const EditDelDataGrid = () => (
+const CrudDataGridAPI = () => (
   <div id="data-grid-demo">
     <Estilo>
       <DataGrid
-        dataSource={clientes}
-        keyExpr="ID"
+        dataSource={dataSource}
+        keyExpr="id"
         showBorders={true}
       >
         <Paging enabled={false} />
@@ -60,42 +88,29 @@ const EditDelDataGrid = () => (
           allowUpdating={true}
           allowAdding={true}
           allowDeleting={true}>
-          <Popup title="Employee Info" showTitle={true} width={700} height={525} />
+          <Popup title="Comentários" showTitle={true} width={700} height={525} />
           <Form>
             <Item itemType="group" colCount={2} colSpan={2}>
-              <Item dataField="FirstName" />
-              <Item dataField="LastName" />
-              <Item dataField="Prefix" />
-              <Item dataField="BirthDate" />
-              <Item dataField="Position" />
-              <Item dataField="HireDate" />
+              <Item dataField="postId" />
+              <Item dataField="id" />
+              <Item dataField="name" />
+              <Item dataField="email" />
               <Item
-                dataField="Notes"
+                dataField="body"
                 editorType="dxTextArea"
                 colSpan={2}
                 editorOptions={notesEditorOptions} />
             </Item>
-
-            <Item itemType="group" caption="Home Address" colCount={2} colSpan={2}>
-              <Item dataField="StateID" />
-              <Item dataField="Address" />
-            </Item>
           </Form>
         </Editing>
-        <Column dataField="Prefix" caption="Title" width={70} />
-        <Column dataField="FirstName" />
-        <Column dataField="LastName" />
-        <Column dataField="BirthDate" dataType="date" />
-        <Column dataField="Position" width={170} />
-        <Column dataField="HireDate" dataType="date" />
-        <Column dataField="StateID" caption="State" width={125}>
-          <Lookup dataSource={states} valueExpr="ID" displayExpr="Name" />
-        </Column>
-        <Column dataField="Address" visible={false} />
-        <Column dataField="Notes" visible={false} />
+        <Column dataField="postId"  />
+        <Column dataField="id" />
+        <Column dataField="name" />
+        <Column dataField="email" />
+        <Column dataField="body" />
       </DataGrid>
     </Estilo>
   </div>
-);
+)
 
-export default EditDelDataGrid;
+export default CrudDataGridAPI
