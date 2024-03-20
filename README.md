@@ -11,6 +11,10 @@
 - DOCUMENTAÇÃO API DataGrid:  https://js.devexpress.com/React/Documentation/ApiReference/UI_Components/dxDataGrid/
 - EDIÇÃO EM POPUP:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/PopupEditing/MaterialBlueLight/
 
+## Recursos para API JSON:
+- https://mockend.com/
+- https://jsonplaceholder.typicode.com/
+
 ## Recomendações
 - CRUD simples com pouco ou nenhum código
 https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/PopupEditing/MaterialBlueLight/
