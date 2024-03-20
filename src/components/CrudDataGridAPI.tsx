@@ -48,27 +48,12 @@ const handleErrors = (response: Response): Response =>{
         throw new Error(response.statusText)
     return response
 }
-/* function handleErrors(response: Response): Response {
-    if (!response.ok)
-        throw new Error(response.statusText);
-    return response;
-} */
 
 const url = 'https://jsonplaceholder.typicode.com/comments/'
 const dataSource = createStore(
     {
         key: 'id',
         loadUrl: url,
-        insert: (values) => {
-            return fetch("https://mydomain.com/MyDataService/myEntity", {
-                method: "POST",
-                body: JSON.stringify(values),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(handleErrors);
-        }
     }
 )
 
