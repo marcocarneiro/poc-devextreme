@@ -41,17 +41,17 @@ const Estilo = styled.div`
   mask-image: url('./delete_black_24dp.svg');
 }
 `
-
 const URL = 'https://gorest.co.in/public/v2/users'
 
 const dataSource = createStore({
   key: 'id',
   loadUrl: `${URL}`,
   /* insertUrl: `${URL}`,
-  updateUrl: `${URL}`,
+  updateUrl: `${URL}/2139284`,
   deleteUrl: `${URL}`,*/ 
   onBeforeSend: (method, ajaxOptions) => {
     ajaxOptions.headers = {'content-type':'application/json'}
+    //ajaxOptions.headers = {'Authorization': 'Bearer 18c4ec7903c951afd3da65094a6830cb0460bfb77b7d899cb4327c78a9056d1d'}
   }, 
 })
 
