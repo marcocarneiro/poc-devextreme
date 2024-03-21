@@ -18,6 +18,9 @@
 - https://mockend.com/
 - https://jsonplaceholder.typicode.com/
 
+## Artigo sobre a camada de dados do DevExtreme
+- https://js.devexpress.com/React/Documentation/Guide/Data_Binding/Data_Layer/#Creating_DataSource
+
 ## Recomendações
 - CRUD simples com pouco ou nenhum código
 https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/PopupEditing/MaterialBlueLight/
