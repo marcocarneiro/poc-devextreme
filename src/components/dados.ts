@@ -1,4 +1,4 @@
-export const employees = [{
+export const clientes = [{
     ID: 1,
     FirstName: 'John',
     LastName: 'Heart',
