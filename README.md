@@ -14,10 +14,7 @@
 
 ## Recursos para API JSON:
 - https://www.youtube.com/watch?v=S2iDxnlQc3k  (várias APIs gratitas para testar)
-- https://mockapi.io/    <br> Documentação: https://github.com/mockapi-io/docs/wiki/Code-examples
-- https://medium.com/code-prestige/mockando-apis-rest-facilmente-com-o-mockapi-48f03a78aaca
-- https://mockend.com/
-- https://jsonplaceholder.typicode.com/
+- https://gorest.co.in/   TOKEN:  18c4ec7903c951afd3da65094a6830cb0460bfb77b7d899cb4327c78a9056d1d
 
 ## Artigo sobre a camada de dados do DevExtreme
 - CONCEITOS IMPORTANTES:  https://js.devexpress.com/React/Documentation/Guide/Data_Binding/Data_Layer/
