@@ -13,13 +13,14 @@
 - https://65fb424614650eb21009be7c.mockapi.io/crudtest/v1/users
 
 ## Recursos para API JSON:
+- https://www.youtube.com/watch?v=S2iDxnlQc3k  (várias APIs gratitas para testar)
 - https://mockapi.io/    <br> Documentação: https://github.com/mockapi-io/docs/wiki/Code-examples
 - https://medium.com/code-prestige/mockando-apis-rest-facilmente-com-o-mockapi-48f03a78aaca
 - https://mockend.com/
 - https://jsonplaceholder.typicode.com/
 
 ## Artigo sobre a camada de dados do DevExtreme
-- https://js.devexpress.com/React/Documentation/Guide/Data_Binding/Data_Layer/#Creating_DataSource
+- CONCEITOS IMPORTANTES:  https://js.devexpress.com/React/Documentation/Guide/Data_Binding/Data_Layer/
 
 ## Recomendações
 - CRUD simples com pouco ou nenhum código

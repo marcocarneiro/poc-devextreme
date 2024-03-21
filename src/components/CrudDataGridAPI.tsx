@@ -42,10 +42,7 @@ const Estilo = styled.div`
 }
 `
 
-//const refreshModeLabel = { 'aria-label': 'Refresh Mode' }
-const URL = 'https://65fc290814650eb2100bafbe.mockapi.io/usuarios/v1/users'
-//https://github.com/mockapi-io/docs/wiki/Code-examples
-//const REFRESH_MODES = ['full', 'reshape', 'repaint']
+const URL = 'https://gorest.co.in/public/v2/users'
 
 const dataSource = createStore({
   key: 'id',
@@ -53,7 +50,7 @@ const dataSource = createStore({
   /* insertUrl: `${URL}`,
   updateUrl: `${URL}`,
   deleteUrl: `${URL}`,*/ 
-  onBeforeSend: (loadUrl, ajaxOptions) => {
+  onBeforeSend: (method, ajaxOptions) => {
     ajaxOptions.headers = {'content-type':'application/json'}
   }, 
 })
@@ -75,21 +72,19 @@ const CrudDataGridAPI = () => {
             allowDeleting={true}>
             <Popup title="Informações do Usuário" showTitle={true} width={700} height={525} />
             <Form>
-              <Item itemType="group" colCount={2} colSpan={2} />        
-              <Item dataField="avatar" />
-              {/* <Item dataField="id" /> */}
+              <Item itemType="group" colCount={2} colSpan={2} />
               <Item dataField="name" />
-              <Item dataField="nascimento" />
-              <Item dataField="cargo" />
-              <Item dataField="createdAt" />
+              {/* <Item dataField="id" /> */}
+              <Item dataField="email" />
+              <Item dataField="gender" />
+              <Item dataField="status" />
             </Form>
-          </Editing>
-          <Column dataField="avatar" caption="Avatar"  />
-          <Column dataField="id" caption="ID" />
-          <Column dataField="name" caption="Nome" />
-          <Column dataField="nascimento" dataType="date" caption="Nascimento:" />
-          <Column dataField="cargo" caption="Cargo" />
-          <Column dataField="createdAt" dataType="date" caption="Admissão em:" />
+          </Editing>          
+          <Column dataField="id" caption="ID"  />
+          <Column dataField="name" caption="NOME" />
+          <Column dataField="email" caption="EMAIL" />
+          <Column dataField="gender" caption="SEXO" />
+          <Column dataField="status" caption="STATUS" />
         </DataGrid>
       </Estilo>
   )  
