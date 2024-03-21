@@ -47,6 +47,7 @@ const Estilo = styled.div`
 
 const refreshModeLabel = { 'aria-label': 'Refresh Mode' }
 const URL = 'https://65fb424614650eb21009be7c.mockapi.io/crudtest/v1/users'
+//https://github.com/mockapi-io/docs/wiki/Code-examples
 const REFRESH_MODES = ['full', 'reshape', 'repaint']
 
 const CrudDataGridAPI = () => {
