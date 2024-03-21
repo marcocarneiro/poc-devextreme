@@ -10,6 +10,7 @@
 - CRUD:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/CRUDOperations/MaterialBlueLight/
 - DOCUMENTAÇÃO API DataGrid:  https://js.devexpress.com/React/Documentation/ApiReference/UI_Components/dxDataGrid/
 - EDIÇÃO EM POPUP:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/PopupEditing/MaterialBlueLight/
+- https://65fb424614650eb21009be7c.mockapi.io/crudtest/v1/users
 
 ## Recursos para API JSON:
 - https://mockapi.io/    <br> Documentação: https://github.com/mockapi-io/docs/wiki/Code-examples
