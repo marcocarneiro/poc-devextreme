@@ -10,11 +10,12 @@
 - CRUD:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/CRUDOperations/MaterialBlueLight/
 - DOCUMENTAÇÃO API DataGrid:  https://js.devexpress.com/React/Documentation/ApiReference/UI_Components/dxDataGrid/
 - EDIÇÃO EM POPUP:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/PopupEditing/MaterialBlueLight/
-- https://65fb424614650eb21009be7c.mockapi.io/crudtest/v1/users
+- AGRUPAMENTO:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/WebAPIService/MaterialBlueLight/
 
 ## Recursos para API JSON:
 - https://www.youtube.com/watch?v=S2iDxnlQc3k  (várias APIs gratitas para testar)
 - https://gorest.co.in/   TOKEN:  18c4ec7903c951afd3da65094a6830cb0460bfb77b7d899cb4327c78a9056d1d
+- CORRIGIR COM ESSAS DICAS: https://www.linkedin.com/pulse/its-always-cors-problem-troubleshooting-solving-errors-carrubba-/
 
 ## Artigo sobre a camada de dados do DevExtreme
 - CONCEITOS IMPORTANTES:  https://js.devexpress.com/React/Documentation/Guide/Data_Binding/Data_Layer/

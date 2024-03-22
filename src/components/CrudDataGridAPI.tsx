@@ -55,12 +55,26 @@ const dataSource = createStore({
   }, 
 })
 
+const teste = createStore({
+  key: 'id',
+  insertMethod: "Post",
+  updateMethod: "Put",
+  deleteMethod: "Delete",
+  loadUrl: `${URL}`,
+  insertUrl: `${URL}`,
+  updateUrl: `${URL}/2139284`,
+  onBeforeSend: (method, ajaxOptions) => {
+    ajaxOptions.headers = {'content-type':'application/json'}
+    ajaxOptions.headers = {'Authorization': 'Bearer 18c4ec7903c951afd3da65094a6830cb0460bfb77b7d899cb4327c78a9056d1d'}
+  }
+})
+
 const CrudDataGridAPI = () => {
   //VER ESTE EXEMPLO:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/WebAPIService/Light/
   return(
       <Estilo>
         <DataGrid
-          dataSource={dataSource}
+          dataSource={teste}
           /* keyExpr="id" */
           showBorders={true}
         >
