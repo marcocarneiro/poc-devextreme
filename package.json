@@ -17,6 +17,7 @@
     "devextreme": "23.2.5",
     "devextreme-aspnet-data-nojquery": "^4.0.0-beta",
     "devextreme-react": "23.2.5",
+    "json-server": "^1.0.0-alpha.23",
     "jspdf": "^2.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

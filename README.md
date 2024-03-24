@@ -13,6 +13,7 @@
 - AGRUPAMENTO:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/WebAPIService/MaterialBlueLight/
 
 ## Recursos para API JSON:
+- https://apidog.com/help/
 - https://www.youtube.com/watch?v=S2iDxnlQc3k  (várias APIs gratitas para testar)
 - https://gorest.co.in/   TOKEN:  18c4ec7903c951afd3da65094a6830cb0460bfb77b7d899cb4327c78a9056d1d
 - CORRIGIR COM ESSAS DICAS: https://www.linkedin.com/pulse/its-always-cors-problem-troubleshooting-solving-errors-carrubba-/
