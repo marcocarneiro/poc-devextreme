@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import DataGrid, { Column, FilterRow, HeaderFilter, SearchPanel, } from 'devextreme-react/data-grid'
 
-import {traducao, currencyBRL} from './helpers/Traducao'
+import {traducao, currencyBRLCell} from './helpers/Traducao'
 traducao()
 
 //FONTE DE DADOS
@@ -17,7 +17,7 @@ const FilterDefaultHeader = () => {
             <Column dataField="OrderNumber" caption="Pedido No" />
             <Column dataField="OrderDate" caption="Data Pedido" dataType="date" />
             <Column dataField="DeliveryDate" caption="Data Entrega" dataType="datetime" format="d/M/yyyy - HH:mm" />
-            <Column dataField="SaleAmount" caption="Valor" dataType="number" format="currency" customizeText={currencyBRL} />
+            <Column dataField="SaleAmount" caption="Valor" dataType="number" format="currency" customizeText={currencyBRLCell} />
             <Column dataField="Employee" caption="Cliente" />
             <Column dataField="CustomerStoreCity" caption="Cidade Loja" />
         </DataGrid>

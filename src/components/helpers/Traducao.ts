@@ -6,7 +6,12 @@ export const traducao = ():void => {
     locale( navigator.language )
 }
 
-export const currencyBRL = (cellInfo: { value: number }): string => {
+export const currencyBRLCell= (cellInfo: { value: number }): string => {
     const numFormat = cellInfo.value.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+    return numFormat
+}
+
+export const currencyBRLTotal = (itemInfo) => {
+    const numFormat = itemInfo.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
     return numFormat
 }

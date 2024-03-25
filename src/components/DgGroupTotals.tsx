@@ -1,10 +1,10 @@
 import React from 'react'
-import DataGrid, { Column, Summary, GroupItem, Export } from 'devextreme-react/data-grid'
+import DataGrid, { Column, Summary, TotalItem, GroupItem, Export } from 'devextreme-react/data-grid'
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { exportDataGrid } from 'devextreme/excel_exporter';
 import { orders } from "./dadosJSON/orders"
-import { traducao, currencyBRL } from "./helpers/Traducao"
+import { traducao, currencyBRLCell, currencyBRLTotal } from "./helpers/Traducao"
 traducao()
 
 //Exportação em Excel
@@ -37,15 +37,17 @@ const DgGroupTotals = () => (
         <Column dataField="Employee" groupIndex={0} caption="Cliente" />
         <Column dataField="CustomerStoreCity" caption="Cidade" />
         <Column dataField="CustomerStoreState" caption="Loja" />
-        <Column dataField="SaleAmount" width={160} alignment="right" format="currency" caption="Valor do Pedido" customizeText={currencyBRL} />
-        <Column dataField="TotalAmount" width={160} alignment="right" format="currency" caption="Total Geral" customizeText={currencyBRL} />
-        <Summary>            
+        <Column dataField="SaleAmount" width={160} alignment="right" format="currency" caption="Valor do Pedido" customizeText={currencyBRLCell} />
+        <Column dataField="TotalAmount" width={160} alignment="right" format="currency" caption="Total Geral" customizeText={currencyBRLCell} />
+        <Summary>
+            {/* Para uma formatação + personalizada, pode-se criar uma função JS para modificar
+            o conteúdo da classe 'dx-group-cell dx-cell-focus-disabled' com o evento onContentReady */}         
             <GroupItem
                 column="TotalAmount"
                 summaryType="sum"
-                valueFormat="currency"
+                valueFormat={currencyBRLTotal}
                 showInGroupFooter={false}
-                displayFormat="total {0}"
+                displayFormat="{0}"
             />
         </Summary>
         <Export enabled={true} allowExportSelectedData={true} />
