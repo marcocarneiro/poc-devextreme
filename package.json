@@ -17,6 +17,9 @@
     "devextreme": "23.2.5",
     "devextreme-aspnet-data-nojquery": "^4.0.0-beta",
     "devextreme-react": "23.2.5",
+    "exceljs": "^4.4.0",
+    "file-saver": "^2.0.5",
+    "file-saver-es": "^2.0.5",
     "json-server": "^1.0.0-alpha.23",
     "jspdf": "^2.5.1",
     "react": "^18.2.0",
@@ -24,6 +27,7 @@
     "whatwg-fetch": "^3.6.20"
   },
   "devDependencies": {
+    "@types/file-saver-es": "^2.0.3",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",

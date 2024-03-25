@@ -17,6 +17,9 @@
 - https://www.youtube.com/watch?v=S2iDxnlQc3k  (várias APIs gratitas para testar)
 - https://gorest.co.in/   TOKEN:  18c4ec7903c951afd3da65094a6830cb0460bfb77b7d899cb4327c78a9056d1d
 - CORRIGIR COM ESSAS DICAS: https://www.linkedin.com/pulse/its-always-cors-problem-troubleshooting-solving-errors-carrubba-/
+- //FAZER ESSE TUTORIAL:  https://www.youtube.com/watch?v=fPuLnzSjPLE - baixar código do github
+- //ou ESSE:  https://www.youtube.com/watch?v=voXTVTW73E8  - em portugues
+- //VERIFICAR CRUD BÁSICO:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/CRUDOperations/MaterialBlueLight/
 
 ## Artigo sobre a camada de dados do DevExtreme
 - CONCEITOS IMPORTANTES:  https://js.devexpress.com/React/Documentation/Guide/Data_Binding/Data_Layer/

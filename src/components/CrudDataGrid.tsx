@@ -42,9 +42,6 @@ const Estilo = styled.div`
 }
 `
 const URL = 'http://localhost:8000/students'
-//FAZER ESSE TUTORIAL:  https://www.youtube.com/watch?v=fPuLnzSjPLE - baixar código do github
-//ou ESSE:  https://www.youtube.com/watch?v=voXTVTW73E8  - em portugues
-//VERIFICAR CRUD BÁSICO:  https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/CRUDOperations/MaterialBlueLight/
 
 const dataSource = createStore({
   key: 'id',

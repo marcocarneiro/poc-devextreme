@@ -57,7 +57,6 @@ const renderLinkCell = (cellData: DataGridTypes.ColumnCellTemplateData) => (
 )
 
 //Formatação para os cabeçalhos das colunas
-//https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/DataGrid/MultiRowHeadersBands/MaterialBlueLight/
 const renderTitleHeader = (data: any): JSX.Element => {
     return <p style={{ fontSize: '16px' }}>{data.column.caption}</p>;
 }
@@ -73,6 +72,7 @@ const FullDataGrid = () => (
         showBorders={true}
         rowAlternationEnabled={true}
         onExporting={onExporting}
+        height={700}
     >
         <Export enabled={true} formats={exportFormats} />
         <ColumnChooser enabled={true} />
