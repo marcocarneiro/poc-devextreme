@@ -1,3 +1,4 @@
+import React, { useCallback, useState } from 'react'
 import DataGrid, {
   Column,
   Editing,
@@ -7,41 +8,21 @@ import DataGrid, {
 } from 'devextreme-react/data-grid'
 import 'devextreme-react/text-area'
 import { Item } from 'devextreme-react/form'
+/* import CustomStore from 'devextreme/data/custom_store';
+import DataSource from 'devextreme/data/data_source'; */
+import 'whatwg-fetch';
 import { createStore } from 'devextreme-aspnet-data-nojquery'
-import styled from '@emotion/styled'
+import { BlueDGIcons } from '../components/helpers/Estilos'
+import { traducao } from "./helpers/Traducao"
+traducao()
 
+const URL = 'http://localhost:8800'
 
-//Pacotes de tradução
-import ptMessages from "devextreme/localization/messages/pt.json"
-import { locale, loadMessages } from "devextreme/localization"
-loadMessages(ptMessages)
-locale(navigator.language)
-
-//Estilo para exibir ícones na coluna de edição
-const Estilo = styled.div`
-.dx-link {
-  text-indent: 50000px;  
-  background-size: 24px 24px;
-  height: 24px;
-  width: 24px;
-  margin-left: 16px;
-  background-color: #07f;
+function handleErrors(response) {
+  if (!response.ok)
+      throw Error(response.statusText);
+  return response;
 }
-.dx-link:hover {
-  background-color: #aaa;
-}
-.dx-link-edit{  
-  background-repeat: none;
-  -webkit-mask-image: url('./edit_black_24dp.svg');
-  mask-image: url('./edit_black_24dp.svg');  
-}
-.dx-link-delete{
-  background-repeat: none;
-  -webkit-mask-image: url('./delete_black_24dp.svg');
-  mask-image: url('./delete_black_24dp.svg');
-}
-`
-const URL = 'http://localhost:8000/students'
 
 const dataSource = createStore({
   key: 'id',
@@ -49,23 +30,63 @@ const dataSource = createStore({
   updateMethod: 'PUT',
   deleteMethod: 'DELETE',
   loadMethod : 'GET',
-  loadUrl: `${URL}`,
-  /* insertUrl: `${URL}`,
-  updateUrl: `${URL}/2139284`, */
+  loadUrl: `${URL}/books`,
+  insertUrl: `${URL}/insertbook`,
+  updateUrl: `${URL}/updatebook`, 
   onBeforeSend: (method, ajaxOptions) => {
     ajaxOptions.headers = {'content-type':'application/json'}
-    //ajaxOptions.headers = {'Authorization': 'Bearer 18c4ec7903c951afd3da65094a6830cb0460bfb77b7d899cb4327c78a9056d1d'}
-    //ajaxOptions.headers = {'Access-Control-Allow-Origin': '*'}
-    //ajaxOptions.headers = {'Access-Control-Allow-Methods': 'GET, POST, PUT'}
-  }
+  },
+  onInserting: (values) => {
+    console.log(values)
+    return fetch(`${URL}/insertbook`, {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(handleErrors)
+  },
 })
 
+const notesEditorOptions = { height: 100 }
+
 const CrudDataGrid = () => {
+  return(
+    <BlueDGIcons>
+      <DataGrid dataSource={dataSource} showBorders={true} repaintChangesOnly={true} >
+        <Paging enabled={false} />
+        <Editing
+          mode="popup"
+          allowUpdating={true}
+          allowAdding={true}
+          allowDeleting={true}>
+          <Popup title="Informações do Usuário" showTitle={true} width={700} height={525} />
+          <Form>
+            <Item itemType="group" colCount={2} colSpan={2} />
+            <Item dataField="title" />            
+            <Item dataField="price" />
+            <Item dataField="desc" editorType="dxTextArea" colSpan={2} editorOptions={ notesEditorOptions } />
+            <Item dataField="cover" />
+            
+          </Form>
+        </Editing>
+
+        <Column dataField="title" caption="TÍTULO"  />
+        <Column dataField="desc" caption="DESCRIÇÃO" />
+        <Column dataField="price" caption="PREÇO" />
+        <Column dataField="cover" caption="CAPA" />        
+      </DataGrid>      
+    </BlueDGIcons>
+  )
+}
+export default CrudDataGrid
+
+/* const CrudDataGrid = () => {
   return(
       <Estilo>
         <DataGrid
           dataSource={dataSource}
-          /* keyExpr="id" */
           showBorders={true}
         >
           <Paging enabled={false} />
@@ -83,14 +104,14 @@ const CrudDataGrid = () => {
               <Item dataField="status" />
             </Form>
           </Editing>         
-          {/* <Column dataField="id" caption="ID"  />
+          <Column dataField="id" caption="ID"  />
           <Column dataField="name" caption="NOME" />
           <Column dataField="email" caption="EMAIL" />
           <Column dataField="gender" caption="SEXO" />
-          <Column dataField="status" caption="STATUS" /> */}
+          <Column dataField="status" caption="STATUS" />
         </DataGrid>
       </Estilo>
   )  
 }
 
-export default CrudDataGrid
+export default CrudDataGrid */
