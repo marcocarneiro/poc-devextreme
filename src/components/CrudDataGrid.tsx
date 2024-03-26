@@ -37,9 +37,8 @@ const dataSource = createStore({
     ajaxOptions.headers = {'content-type':'application/json'}
   },
   onInserting: (values) => {
-    console.log(values)
     return fetch(`${URL}/insertbook`, {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(values),
         headers: {
             'Content-Type': 'application/json'
