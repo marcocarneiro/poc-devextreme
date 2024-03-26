@@ -32,10 +32,12 @@ const dataSource = createStore({
   loadMethod : 'GET',
   loadUrl: `${URL}/books`,
   insertUrl: `${URL}/insertbook`,
-  updateUrl: `${URL}/updatebook`, 
+  updateUrl: `${URL}/updatebook/:id`,
+  deleteUrl: `${URL}/delbook/:id`,
   onBeforeSend: (method, ajaxOptions) => {
     ajaxOptions.headers = {'content-type':'application/json'}
   },
+
   onInserting: (values) => {
     return fetch(`${URL}/insertbook`, {
         method: 'POST',
@@ -45,6 +47,36 @@ const dataSource = createStore({
         }
     })
     .then(handleErrors)
+  },
+
+  onUpdating(key, values) {
+    fetch(`${URL}/updatebook/${key}`, {
+      method: 'PUT',
+      body: JSON.stringify(values),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(updatedData => {
+        console.log('Data updated:', updatedData);
+      })
+      .catch(error => {
+        console.error('Error updating data:', error);
+    })
+  },
+
+  onRemoving(key) {
+    fetch(`${URL}/delbook/${key}`, { 
+       method: 'DELETE'})
+       .then(response => {  
+        console.log(response.status)
+    })
   },
 })
 
