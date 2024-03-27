@@ -49,9 +49,7 @@ const dataSource = createStore({
   },  
 
   onUpdating(key, values) {
-    console.log(values)
-    //https://dev.to/duhbhavesh/how-to-use-fetch-api-for-crud-operations-57a0
-    /* fetch(`${URL}/updatebook/${key}`, {
+    fetch(`${URL}/updatebook/${key}`, {
       method: 'PUT',
       body: JSON.stringify(values),
       headers: {
@@ -70,7 +68,7 @@ const dataSource = createStore({
       })
       .catch(error => {
         console.error('Error updating data:', error);
-    }) */
+    })
   },
 
   onRemoving(key) {
