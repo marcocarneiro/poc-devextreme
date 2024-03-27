@@ -1,3 +1,5 @@
+import '../../App.css'
+import 'devextreme/dist/css/dx.light.css'
 import styled from '@emotion/styled'
 
 //Estilo para exibir ícones na coluna de edição
@@ -23,5 +25,12 @@ export const BlueDGIcons = styled.div`
   background-repeat: none;
   -webkit-mask-image: url('./delete_black_24dp.svg');
   mask-image: url('./delete_black_24dp.svg');
+}
+`
+
+export const HeaderOrange = styled.div`
+.dx-datagrid-headers {
+  color: #fff;
+  background-color: #f70 !important;
 }
 `

@@ -11,7 +11,7 @@ import 'devextreme-react/text-area'
 import { Item } from 'devextreme-react/form'
 import styled from '@emotion/styled'
 
-import { clientes, states } from './dadosJSON/dados.ts'
+import { clientes, states } from '../dadosJSON/dados.ts'
 
 //Pacotes de tradução
 import ptMessages from "devextreme/localization/messages/pt.json"

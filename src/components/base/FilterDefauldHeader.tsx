@@ -1,11 +1,11 @@
 import React, { useCallback, useRef, useState } from 'react'
 import DataGrid, { Column, FilterRow, HeaderFilter, SearchPanel, } from 'devextreme-react/data-grid'
 
-import {traducao, currencyBRLCell} from './helpers/Traducao'
+import {traducao, currencyBRLCell} from '../helpers/Traducao'
 traducao()
 
 //FONTE DE DADOS
-import { pedidos } from './dadosJSON/pedidos'
+import { pedidos } from '../dadosJSON/pedidos'
 
 const FilterDefaultHeader = () => {
     return(

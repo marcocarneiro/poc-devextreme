@@ -1,16 +1,23 @@
+//Recursos CSS
 import '../App.css'
 import 'devextreme/dist/css/dx.light.css'
-//import CrudDataGridAPI from '../components/CrudDataGridAPI'
-//import FilterDefaultHeader from '../components/FilterDefauldHeader'
+import { HeaderOrange, BlueDGIcons } from '../components/helpers/Estilos'
+
+//Componentes
+import CrudDataGrid from '../components/base/CrudDataGrid'
 //import DataGridHScroll from '../components/DataGridHScroll'
-import CrudDataGrid from '../components/CrudDataGrid'
-//import { BlueDGIcons } from '../components/helpers/Estilos'
-//import FullDataGrid from '../components/FullDataGrid'
+//import DataGridParams from '../components/DataGridParams'
 //import DgGroupTotals from '../components/DgGroupTotals'
+//import FullDataGrid from '../components/base/FullDataGrid'
+
 
 const Home = () => {
     return(
-        <CrudDataGrid />     
+        <HeaderOrange>
+            <BlueDGIcons>
+                <CrudDataGrid />
+            </BlueDGIcons>             
+        </HeaderOrange>                           
     )    
 }
 
