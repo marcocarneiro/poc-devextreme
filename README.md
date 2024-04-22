@@ -2,7 +2,8 @@
  Testes componentes Material UI & DevExtreme
 
 ## Instalações adicionais
-- Material UI & Material Icons
+- Material UI:  https://mui.com/material-ui/getting-started/
+- Material Icons:  https://mui.com/material-ui/material-icons/
 - JSPDF plugin para exportação de dados no formato PDF
 - Módulo devextreme-aspnet-data-nojquery para conexão com APIs externas (datasource)
 
