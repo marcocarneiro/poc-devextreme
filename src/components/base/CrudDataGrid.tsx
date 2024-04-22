@@ -11,6 +11,8 @@ import { Item } from 'devextreme-react/form'
 import 'whatwg-fetch';
 import { createStore } from 'devextreme-aspnet-data-nojquery'
 import { traducao } from "../helpers/Traducao"
+import IconButton from '@mui/material/IconButton';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 traducao()
 
 const URL = 'http://localhost:8800'
@@ -82,30 +84,40 @@ const dataSource = createStore({
 
 const notesEditorOptions = { height: 100 }
 
+const pasteContent = ()=> {
+  alert('COLA AGORA!!!');
+}
+
 const CrudDataGrid = () => {
   return(
-    <DataGrid dataSource={dataSource} showBorders={true} repaintChangesOnly={true} >
-      <Paging enabled={false} />
-      <Editing
-        mode="popup"
-        allowUpdating={true}
-        allowAdding={true}
-        allowDeleting={true}>
-        <Popup title="Informações do Usuário" showTitle={true} width={700} height={525} />
-        <Form>
-          <Item itemType="group" colCount={2} colSpan={2} />
-          <Item dataField="title" />            
-          <Item dataField="price" />
-          <Item dataField="desc" editorType="dxTextArea" colSpan={2} editorOptions={ notesEditorOptions } />
-          <Item dataField="cover" />          
-        </Form>
-      </Editing>
+    <>
+        <IconButton aria-label="contentcopy" onClick={pasteContent}>
+            <ContentCopyIcon />
+          </IconButton>
+        <DataGrid dataSource={dataSource} showBorders={true} repaintChangesOnly={true} >
 
-      <Column dataField="title" caption="TÍTULO"  />
-      <Column dataField="desc" caption="DESCRIÇÃO" />
-      <Column dataField="price" caption="PREÇO" />
-      <Column dataField="cover" caption="CAPA" />        
-    </DataGrid>
+        <Paging enabled={false} />
+        <Editing
+          mode="popup"
+          allowUpdating={true}
+          allowAdding={true}
+          allowDeleting={true}>
+          <Popup title="Informações do Usuário" showTitle={true} width={700} height={525} />
+          <Form>
+            <Item itemType="group" colCount={2} colSpan={2} />
+            <Item dataField="title" />            
+            <Item dataField="price" />
+            <Item dataField="desc" editorType="dxTextArea" colSpan={2} editorOptions={ notesEditorOptions } />
+            <Item dataField="cover" />          
+          </Form>
+        </Editing>
+
+        <Column dataField="title" caption="TÍTULO"  />
+        <Column dataField="desc" caption="DESCRIÇÃO" />
+        <Column dataField="price" caption="PREÇO" />
+        <Column dataField="cover" caption="CAPA" />        
+      </DataGrid>
+    </>
   )
 }
 export default CrudDataGrid
