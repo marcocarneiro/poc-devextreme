@@ -84,8 +84,19 @@ const dataSource = createStore({
 
 const notesEditorOptions = { height: 100 }
 
-const pasteContent = ()=> {
-  alert('COLA AGORA!!!');
+const pasteContent = () => {
+  // e o navegador não suporta o acesso ao clipboard, nada faz
+  if (!navigator.clipboard) {
+    return;
+  }
+  navigator.clipboard.readText()
+    .then((conteudo) => {
+
+      console.log("Conteúdo do clipboard:", conteudo);
+    })
+    .catch((erro) => {
+      console.error("Erro ao acessar o conteúdo do clipboard:", erro);
+    });
 }
 
 const CrudDataGrid = () => {
@@ -93,7 +104,7 @@ const CrudDataGrid = () => {
     <>
         <IconButton aria-label="contentcopy" onClick={pasteContent}>
             <ContentCopyIcon />
-          </IconButton>
+        </IconButton>
         <DataGrid dataSource={dataSource} showBorders={true} repaintChangesOnly={true} >
 
         <Paging enabled={false} />
