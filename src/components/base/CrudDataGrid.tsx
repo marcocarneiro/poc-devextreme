@@ -124,6 +124,17 @@ const trataDados = (pastedData: string) => {
   }  
   console.log(books);
 }
+//Se basear neste exemplo de função para implementar as novas linhas no datagrid
+//utilizar no lugar do trecho console.log(books);
+/*
+function bindGrid(){
+  $("#gridContainer").dxDataGrid({
+        dataSource: customers,
+        columns: ["FirstName", "LastName", "Age", "Email"],
+        showBorders: true
+    });
+}
+*/
 ////////// UTILIZAR EM NOVO COMPONENTE - FIM BLOCO
 
 
