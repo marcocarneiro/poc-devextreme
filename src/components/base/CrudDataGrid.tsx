@@ -9,6 +9,7 @@ import DataGrid, {
 import 'devextreme-react/text-area'
 import { Item } from 'devextreme-react/form'
 import 'whatwg-fetch';
+import DataSource from 'devextreme/data/data_source';
 import { createStore } from 'devextreme-aspnet-data-nojquery'
 import { traducao } from "../helpers/Traducao"
 import IconButton from '@mui/material/IconButton';
@@ -170,19 +171,12 @@ const CrudDataGrid = () => {
       if (cells.length > 1) {
         books.push({ 'titulo': cells[0], 'descricao': cells[1], 'preco': cells[2], 'capa': cells[3] });
       }
-    }  
-    const novoDataSource = createStore({
-      key: 'id',
-      insertMethod: 'POST',
-      onInserting: values => {
-        return fetch(`${URL}/inserirNovoLivro`, {
-          method: 'POST',
-          body: JSON.stringify(books),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(handleErrors);
+    } 
+
+    const novoDataSource = new DataSource({
+      store: {
+        type: "array",
+        data: books
       }
     });
 
