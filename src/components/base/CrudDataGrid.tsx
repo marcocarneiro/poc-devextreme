@@ -91,21 +91,47 @@ const pasteContent = () => {
   }
   navigator.clipboard.readText()
     .then((conteudo) => {
-
-      console.log("Conteúdo do clipboard:", conteudo);
+      //Trata o conteúdo do clipboard, se for compatível
+      trataDados(conteudo)
     })
     .catch((erro) => {
       console.error("Erro ao acessar o conteúdo do clipboard:", erro);
     });
 }
 
+interface Book {
+  titulo: string;
+  descricao: string;
+  preco: string;
+  capa: string;
+}
+
+const books: Book[] = [];
+const trataDados = (pastedData: string) => {
+  const data: string = pastedData;
+  const rows: string[] = data.split('\n');
+  const books: { titulo: string, descricao: string, preco: string, capa: string }[] = [];
+  
+  for (const y in rows) {
+    const cells: string[] = rows[y].split('\t');
+    // Remover o caractere '\r' da última célula, se presente
+    cells[cells.length - 1] = cells[cells.length - 1].replace(/\r$/, '');
+
+    if (cells.length > 1) {
+      books.push({ 'titulo': cells[0], 'descricao': cells[1], 'preco': cells[2], 'capa': cells[3] });
+    }
+  }  
+  console.log(books);
+}
+
+
 const CrudDataGrid = () => {
   return(
     <>
-        <IconButton aria-label="contentcopy" onClick={pasteContent}>
-            <ContentCopyIcon />
-        </IconButton>
-        <DataGrid dataSource={dataSource} showBorders={true} repaintChangesOnly={true} >
+      <IconButton aria-label="contentcopy" onClick={pasteContent}>
+          <ContentCopyIcon />
+      </IconButton>
+      <DataGrid dataSource={dataSource} showBorders={true} repaintChangesOnly={true} >
 
         <Paging enabled={false} />
         <Editing
