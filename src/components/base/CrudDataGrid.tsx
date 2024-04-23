@@ -9,7 +9,7 @@ import DataGrid, {
 import 'devextreme-react/text-area'
 import { Item } from 'devextreme-react/form'
 import 'whatwg-fetch';
-import DataSource from 'devextreme/data/data_source';
+import CustomStore from 'devextreme/data/custom_store';
 import { createStore } from 'devextreme-aspnet-data-nojquery'
 import { traducao } from "../helpers/Traducao"
 import IconButton from '@mui/material/IconButton';
@@ -34,6 +34,7 @@ interface Book {
   preco: string;
   capa: string;
 }
+const books: Book[] = [];
 
 ////////// UTILIZAR EM NOVO COMPONENTE
 /* const pasteContent = () => {
@@ -173,12 +174,12 @@ const CrudDataGrid = () => {
       }
     } 
 
-    const novoDataSource = new DataSource({
-      store: {
-        type: "array",
-        data: books
+    const novoDataSource = new CustomStore({
+      key: 'id',
+      insert: (books) => {
+          // ...
       }
-    });
+  });
 
     // Atualize o estado com o novo dataSource
     setDataSource(novoDataSource);
