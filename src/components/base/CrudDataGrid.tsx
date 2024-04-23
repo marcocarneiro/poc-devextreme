@@ -84,6 +84,7 @@ const dataSource = createStore({
 
 const notesEditorOptions = { height: 100 }
 
+////////// UTILIZAR EM NOVO COMPONENTE
 const pasteContent = () => {
   // e o navegador não suporta o acesso ao clipboard, nada faz
   if (!navigator.clipboard) {
@@ -123,6 +124,7 @@ const trataDados = (pastedData: string) => {
   }  
   console.log(books);
 }
+////////// UTILIZAR EM NOVO COMPONENTE - FIM BLOCO
 
 
 const CrudDataGrid = () => {
