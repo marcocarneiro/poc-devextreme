@@ -76,17 +76,17 @@ const CrudDataGrid = () => {
           return response.json();
         })
         .then(updatedData => {
-          console.log('Data updated:', updatedData);
+          //console.log('Data updated:', updatedData);
         })
         .catch(error => {
-          console.error('Error updating data:', error);
+          //console.error('Error updating data:', error);
         });
     },
     onRemoving: key => {
       return fetch(`${URL}/delbook/${key}`, {
         method: 'DELETE'
       }).then(response => {
-        console.log(response.status);
+        //console.log(response.status);
       });
     }
   }));
@@ -102,7 +102,7 @@ const CrudDataGrid = () => {
         trataDados(conteudo)
       })
       .catch((erro) => {
-        console.error("Erro ao acessar o conteúdo do clipboard:", erro);
+        //console.error("Erro ao acessar o conteúdo do clipboard:", erro);
       });
 
   };
@@ -120,26 +120,6 @@ const CrudDataGrid = () => {
         books.push({ 'titulo': cells[0], 'descricao': cells[1], 'preco': cells[2], 'capa': cells[3] });
       }
     } 
-
-    //
-    const novoDataSource = new CustomStore({
-      key: 'id',
-      load: () => fetch(`${URL}/books`),
-      insert: books => {
-        return fetch(`${URL}/insertbook`, {
-          method: 'POST',
-          body: JSON.stringify(books),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        .then(handleErrors);
-      }
-    });
-
-    // Atualize o estado com o novo dataSource
-    setDataSource(novoDataSource);
-    console.log(books);
   }
 
   
@@ -148,7 +128,7 @@ const CrudDataGrid = () => {
       <IconButton aria-label="contentcopy" onClick={pasteContent}>
           <ContentCopyIcon />
       </IconButton>
-      <DataGrid dataSource={dataSource} showBorders={true} repaintChangesOnly={true} >
+      <DataGrid dataSource={dataSource} showBorders={true} repaintChangesOnly={true}>
 
         <Paging enabled={false} />
         <Editing
@@ -176,63 +156,3 @@ const CrudDataGrid = () => {
 }
 export default CrudDataGrid
 
-/*
-  EXEMPLO DO CHATGPT
-  import React, { useState } from 'react';
-import DataGrid, { Column, Editing, Paging, Pager, PagingProps } from 'devextreme-react/data-grid';
-
-const App = () => {
-  // 1. Criar um estado para armazenar os dados do DataGrid
-  const [data, setData] = useState([
-    { id: 1, name: 'John', age: 30 },
-    { id: 2, name: 'Jane', age: 25 }
-  ]);
-
-  // Função para adicionar uma nova linha
-  const addRow = () => {
-    const newData = [...data];
-    const newId = data.length + 1;
-    newData.push({ id: newId, name: 'New Name', age: 0 }); // Adicionar uma nova linha com valores padrão
-    setData(newData);
-  };
-
-  // 2. Definir a estrutura das colunas do DataGrid
-  const columns: Column[] = [
-    { dataField: 'id', caption: 'ID' },
-    { dataField: 'name', caption: 'Name' },
-    { dataField: 'age', caption: 'Age' }
-  ];
-
-  return (
-    <div>
-      <button onClick={addRow}>Adicionar Nova Linha</button>
-      <DataGrid
-        dataSource={data}
-        showBorders={true}
-      >
-        {columns.map((column, index) => (
-          <Column key={index} {...column} />
-        ))}
-        <Editing
-          mode="row"
-          allowAdding={false} // Desativar a adição de novas linhas por edição direta
-          allowDeleting={true}
-          allowUpdating={true}
-        />
-        <Paging defaultPageSize={10} />
-        <Pager
-          showPageSizeSelector={true}
-          allowedPageSizes={[5, 10, 20]}
-          showInfo={true}
-        />
-      </DataGrid>
-    </div>
-  );
-};
-
-export default App;
-
-
-
-
-  */
