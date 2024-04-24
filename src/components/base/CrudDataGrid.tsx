@@ -36,59 +36,6 @@ interface Book {
 }
 const books: Book[] = [];
 
-////////// UTILIZAR EM NOVO COMPONENTE
-/* const pasteContent = () => {
-  // se o navegador não suporta o acesso ao clipboard, nada faz
-  if (!navigator.clipboard) {
-    return;
-  }
-  navigator.clipboard.readText()
-    .then((conteudo) => {
-      //Trata o conteúdo do clipboard, se for compatível
-      trataDados(conteudo)
-    })
-    .catch((erro) => {
-      console.error("Erro ao acessar o conteúdo do clipboard:", erro);
-    });
-}
-
-interface Book {
-  titulo: string;
-  descricao: string;
-  preco: string;
-  capa: string;
-}
-
-const books: Book[] = [];
-const trataDados = (pastedData: string) => {
-  const data: string = pastedData;
-  const rows: string[] = data.split('\n');
-  const books: { titulo: string, descricao: string, preco: string, capa: string }[] = [];
-  
-  for (const y in rows) {
-    const cells: string[] = rows[y].split('\t');
-    // Remover o caractere '\r' da última célula, se presente
-    cells[cells.length - 1] = cells[cells.length - 1].replace(/\r$/, '');
-
-    if (cells.length > 1) {
-      books.push({ 'titulo': cells[0], 'descricao': cells[1], 'preco': cells[2], 'capa': cells[3] });
-    }
-  }  
-  console.log(books);
-} */
-//Se basear neste exemplo de função para implementar as novas linhas no datagrid
-//utilizar no lugar do trecho console.log(books);
-/*
-function bindGrid(){
-  $("#gridContainer").dxDataGrid({
-        dataSource: customers,
-        columns: ["FirstName", "LastName", "Age", "Email"],
-        showBorders: true
-    });
-}
-*/
-////////// UTILIZAR EM NOVO COMPONENTE - FIM BLOCO
-
 
 const CrudDataGrid = () => {
   const [dataSource, setDataSource] = useState(createStore({
@@ -174,19 +121,28 @@ const CrudDataGrid = () => {
       }
     } 
 
+    //
     const novoDataSource = new CustomStore({
       key: 'id',
-      insert: (books) => {
-          // ...
+      load: () => fetch(`${URL}/books`),
+      insert: books => {
+        return fetch(`${URL}/insertbook`, {
+          method: 'POST',
+          body: JSON.stringify(books),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(handleErrors);
       }
-  });
+    });
 
     // Atualize o estado com o novo dataSource
     setDataSource(novoDataSource);
+    console.log(books);
   }
 
-
-
+  
   return(
     <>
       <IconButton aria-label="contentcopy" onClick={pasteContent}>
@@ -219,3 +175,64 @@ const CrudDataGrid = () => {
   )
 }
 export default CrudDataGrid
+
+/*
+  EXEMPLO DO CHATGPT
+  import React, { useState } from 'react';
+import DataGrid, { Column, Editing, Paging, Pager, PagingProps } from 'devextreme-react/data-grid';
+
+const App = () => {
+  // 1. Criar um estado para armazenar os dados do DataGrid
+  const [data, setData] = useState([
+    { id: 1, name: 'John', age: 30 },
+    { id: 2, name: 'Jane', age: 25 }
+  ]);
+
+  // Função para adicionar uma nova linha
+  const addRow = () => {
+    const newData = [...data];
+    const newId = data.length + 1;
+    newData.push({ id: newId, name: 'New Name', age: 0 }); // Adicionar uma nova linha com valores padrão
+    setData(newData);
+  };
+
+  // 2. Definir a estrutura das colunas do DataGrid
+  const columns: Column[] = [
+    { dataField: 'id', caption: 'ID' },
+    { dataField: 'name', caption: 'Name' },
+    { dataField: 'age', caption: 'Age' }
+  ];
+
+  return (
+    <div>
+      <button onClick={addRow}>Adicionar Nova Linha</button>
+      <DataGrid
+        dataSource={data}
+        showBorders={true}
+      >
+        {columns.map((column, index) => (
+          <Column key={index} {...column} />
+        ))}
+        <Editing
+          mode="row"
+          allowAdding={false} // Desativar a adição de novas linhas por edição direta
+          allowDeleting={true}
+          allowUpdating={true}
+        />
+        <Paging defaultPageSize={10} />
+        <Pager
+          showPageSizeSelector={true}
+          allowedPageSizes={[5, 10, 20]}
+          showInfo={true}
+        />
+      </DataGrid>
+    </div>
+  );
+};
+
+export default App;
+
+
+
+
+  */
