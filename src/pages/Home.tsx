@@ -4,8 +4,8 @@ import 'devextreme/dist/css/dx.light.css';
 import { HeaderOrange, BlueDGIcons } from '../components/helpers/Estilos';
 
 //Componentes
-import CrudDataGridArray from '../components/base/CrudDataGridArray';
-//import CrudDataGrid from '../components/base/CrudDataGrid';
+//import CrudDataGridArray from '../components/base/CrudDataGridArray';
+import CrudDataGrid from '../components/base/CrudDataGrid';
 //import DataGridHScroll from '../components/DataGridHScroll';
 //import DataGridParams from '../components/DataGridParams';
 //import DgGroupTotals from '../components/DgGroupTotals';
@@ -16,7 +16,7 @@ const Home = () => {
     return(
         <HeaderOrange>
             <BlueDGIcons>
-                <CrudDataGridArray />
+                <CrudDataGrid />
             </BlueDGIcons>             
         </HeaderOrange>                           
     )    
