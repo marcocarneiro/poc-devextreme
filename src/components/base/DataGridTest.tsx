@@ -1,5 +1,5 @@
-// Componente DataGridTest
-import React, { useCallback, useState } from 'react';
+/** Importação de componentes e recursos  **/
+import React, { useState } from 'react';
 import DataGrid, {
   Column,
   Editing,
@@ -11,20 +11,26 @@ import 'devextreme-react/text-area';
 import { Item } from 'devextreme-react/form';
 import 'whatwg-fetch';
 import { createStore } from 'devextreme-aspnet-data-nojquery';
-import { traducao } from "../helpers/Traducao";
 import ButtonCopyPasteFromExcel from './ButtonCopyPasteFromExcel';
+
+/** Importação do helper de tradução e ativação da tradução da UI */
+import { traducao } from "../helpers/Traducao";
 traducao();
 
+/** URL da API (importante: Substituir abordagem por VARIÁVEL DE AMBIENTE) */
 const URL = 'http://localhost:8800';
 
+/** Função para msg de erro na rotina de INSERTING */
 const handleErrors = (response) => {
   if (!response.ok)
     throw Error(response.statusText);
   return response;
 }
 
+/** Definição da altura do Textfield no formulário de inserção de dados */
 const notesEditorOptions = { height: 100 };
 
+/** Definição do objeto Book com os tipos de dados, geralmente usado no BD */
 interface Book {
   title: string;
   desc: string;
@@ -32,8 +38,9 @@ interface Book {
   cover: string;
 }
 
+/** Declaração do componente DataGridTest */
 const DataGridTest = () => {
-  const [dataSource, setDataSource] = useState(createStore({
+  const [dataSource, setDataSource] = useState(createStore({ //método createStore atribuído a um STATE
     key: 'id',
     insertMethod: 'POST',
     updateMethod: 'PUT',
@@ -63,17 +70,39 @@ const DataGridTest = () => {
         });
     },
     onUpdating: (key, values) => {
-      // Implementação do onUpdating...
+      return fetch(`${URL}/updatebook/${key}`, {
+        method: 'PUT',
+        body: JSON.stringify(values),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(updatedData => {
+          console.log('Data updated:', updatedData);
+        })
+        .catch(error => {
+          console.error('Error updating data:', error);
+        });
     },
     onRemoving: key => {
-      // Implementação do onRemoving...
+      return fetch(`${URL}/delbook/${key}`, {
+        method: 'DELETE'
+      }).then(response => {
+        console.log(response.status);
+      });
     }
   }));
 
   const [forceUpdate, setForceUpdate] = useState(false); // Estado local para forçar a atualização do componente
 
-  const onDataInserted = () => {
-    setForceUpdate(prevForceUpdate => !prevForceUpdate); // Forçando a atualização do componente após a inserção dos dados
+  const onDataInserted = () => { // Forçando a atualização do componente após a inserção dos dados - UTILIZADO PELO BOTÃO
+    setForceUpdate(prevForceUpdate => !prevForceUpdate);
   };
 
   return (
