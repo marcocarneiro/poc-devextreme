@@ -7,11 +7,11 @@ import { HeaderOrange, BlueDGIcons } from '../components/helpers/Estilos';
 //import CrudDataGridArray from '../components/base/CrudDataGridArray';
 //import CrudDataGrid from '../components/base/CrudDataGrid';
 //import DataGridCopyPaste from '../components/base/DataGridCopyPaste';
-import DataGridTest from '../components/base/DataGridTest';
 //import DataGridHScroll from '../components/DataGridHScroll';
 //import DataGridParams from '../components/DataGridParams';
 //import DgGroupTotals from '../components/DgGroupTotals';
 //import FullDataGrid from '../components/base/FullDataGrid';
+import DataGridTest from '../components/base/DataGridTest';
 
 
 const Home = () => {
