@@ -1,3 +1,4 @@
+// Componente DataGridTest
 import React, { useCallback, useState } from 'react';
 import DataGrid, {
   Column,
@@ -25,10 +26,10 @@ const handleErrors = (response) => {
 const notesEditorOptions = { height: 100 };
 
 interface Book {
-  titulo: string;
-  descricao: string;
-  preco: string;
-  capa: string;
+  title: string;
+  desc: string;
+  price: string;
+  cover: string;
 }
 
 const DataGridTest = () => {
@@ -53,43 +54,31 @@ const DataGridTest = () => {
           'Content-Type': 'application/json'
         }
       })
-        .then(handleErrors);
-    },
-    onUpdating: (key, values) => {
-      return fetch(`${URL}/updatebook/${key}`, {
-        method: 'PUT',
-        body: JSON.stringify(values),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(updatedData => {
-          console.log('Data updated:', updatedData);
-        })
-        .catch(error => {
-          console.error('Error updating data:', error);
+        .then(handleErrors)
+        .then(() => {
+          setDataSource(prevDataSource => {
+            prevDataSource.load();
+            return prevDataSource;
+          });
         });
     },
+    onUpdating: (key, values) => {
+      // Implementação do onUpdating...
+    },
     onRemoving: key => {
-      return fetch(`${URL}/delbook/${key}`, {
-        method: 'DELETE'
-      }).then(response => {
-        console.log(response.status);
-      });
+      // Implementação do onRemoving...
     }
   }));
 
   const [forceUpdate, setForceUpdate] = useState(false); // Estado local para forçar a atualização do componente
 
+  const onDataInserted = () => {
+    setForceUpdate(prevForceUpdate => !prevForceUpdate); // Forçando a atualização do componente após a inserção dos dados
+  };
+
   return (
     <>
-      <ButtonCopyPasteFromExcel /> {/* Substituído o botão de cópia e colagem pelo novo componente */}
+      <ButtonCopyPasteFromExcel onDataInserted={onDataInserted} /> 
       <DataGrid key={forceUpdate} dataSource={dataSource} showBorders={true} repaintChangesOnly={true}>
         <Paging enabled={false} />
         <Editing

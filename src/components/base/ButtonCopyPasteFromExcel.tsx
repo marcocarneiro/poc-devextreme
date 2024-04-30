@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+
+const URL = 'http://localhost:8800';
 
 interface Book {
   title: string;
@@ -10,17 +12,19 @@ interface Book {
 }
 
 interface ButtonCopyPasteFromExcelProps {
-  pasteHandler: (data: string) => void;
+  onDataInserted: () => void; // Adicionando a função onDataInserted
 }
 
-const ButtonCopyPasteFromExcel: React.FC<ButtonCopyPasteFromExcelProps> = ({ pasteHandler }) => {
+const ButtonCopyPasteFromExcel: React.FC<ButtonCopyPasteFromExcelProps> = ({ onDataInserted }) => {
+  const [insertSuccess, setInsertSuccess] = useState(false); // Estado local para indicar se a inserção foi bem-sucedida
+
   const pasteContent = () => {
     if (!navigator.clipboard) {
       return;
     }
     navigator.clipboard.readText()
       .then((conteudo) => {
-        trataDados(conteudo)
+        trataDados(conteudo);
       })
       .catch((erro) => {
         console.log(erro);
@@ -64,6 +68,8 @@ const ButtonCopyPasteFromExcel: React.FC<ButtonCopyPasteFromExcelProps> = ({ pas
         console.error('Erro ao inserir livro:', error);
       }
     }
+    setInsertSuccess(true); // Indicando que a inserção foi bem-sucedida
+    onDataInserted(); // Chamando onDataInserted após inserção bem-sucedida
   };
 
   return (
