@@ -11,7 +11,7 @@ import { Item } from 'devextreme-react/form';
 import 'whatwg-fetch';
 import { createStore } from 'devextreme-aspnet-data-nojquery';
 import { traducao } from "../helpers/Traducao";
-import ButtonCopyPasteFromExcel from './ButtonCopyPasteFromExcel'; // Importando o novo componente aqui
+import ButtonCopyPasteFromExcel from './ButtonCopyPasteFromExcel';
 traducao();
 
 const URL = 'http://localhost:8800';
