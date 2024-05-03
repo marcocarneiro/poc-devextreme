@@ -1,5 +1,6 @@
 /** Importação de componentes e recursos  **/
 import React, { useState } from 'react';
+import { Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
@@ -89,9 +90,11 @@ const ButtonCopyPasteFromExcel: React.FC<ButtonCopyPasteFromExcelProps> = ({ onD
   };
 
   return (
-    <IconButton aria-label="contentcopy" onClick={pasteContent}>
+    <Button aria-label="contentcopy" variant="outlined" color="info" onClick={pasteContent}>
+    {/* <IconButton aria-label="contentcopy" onClick={pasteContent}> */}
       <ContentCopyIcon />
-    </IconButton>
+    {/* </IconButton> */}
+    </Button>
   );
 };
 

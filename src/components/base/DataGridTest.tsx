@@ -6,9 +6,10 @@ import DataGrid, {
   Popup,
   Paging,
   Form,
+  Toolbar, Item
 } from 'devextreme-react/data-grid';
+import { Item as FormItem } from 'devextreme-react/form';
 import 'devextreme-react/text-area';
-import { Item } from 'devextreme-react/form';
 import 'whatwg-fetch';
 import { createStore } from 'devextreme-aspnet-data-nojquery';
 import ButtonCopyPasteFromExcel from './ButtonCopyPasteFromExcel';
@@ -105,32 +106,48 @@ const DataGridTest = () => {
     setForceUpdate(prevForceUpdate => !prevForceUpdate);
   };
 
+  const addNewRow = () => {
+    // Adicione aqui a lógica para adicionar uma nova linha ao dataSource
+    // Isso pode envolver abrir o formulário de edição ou simplesmente inserir uma nova linha vazia
+    // Por exemplo, você pode usar a função `insertRow` do DevExtreme DataGrid.
+    alert('ABRIR MODAL!!')
+  };
+
   return (
-    <>
-      <ButtonCopyPasteFromExcel onDataInserted={onDataInserted} /> 
+    <div className="grid-container">
       <DataGrid key={forceUpdate} dataSource={dataSource} showBorders={true} repaintChangesOnly={true}>
-        <Paging enabled={false} />
+        <Toolbar>
+          <Item>
+            <button onClick={addNewRow}>Add</button>
+          </Item>
+          <Item>
+            <ButtonCopyPasteFromExcel onDataInserted={onDataInserted} />
+          </Item>          
+        </Toolbar>
+
+        <Paging enabled={true} defaultPageSize={10} />
+        
         <Editing
           mode="popup"
           allowUpdating={true}
-          allowAdding={true}
-          allowDeleting={true}>
-          <Popup title="Informações do Usuário" showTitle={true} width={700} height={525} />
-          <Form>
-            <Item itemType="group" colCount={2} colSpan={2} />
-            <Item dataField="title" />            
-            <Item dataField="price" />
-            <Item dataField="desc" editorType="dxTextArea" colSpan={2} editorOptions={ notesEditorOptions } />
-            <Item dataField="cover" />          
-          </Form>
-        </Editing>
+          allowAdding={false} // Desabilitando a adição de novos itens através do componente Editing
+          allowDeleting={true} />
+
+        <Popup title="Informações do Usuário" showTitle={true} width={700} height={525} />
+        <Form>
+          <FormItem itemType="group" colCount={2} colSpan={2} />
+          <FormItem dataField="title" />            
+          <FormItem dataField="price" />
+          <FormItem dataField="desc" editorType="dxTextArea" colSpan={2} editorOptions={ notesEditorOptions } />
+          <FormItem dataField="cover" />          
+        </Form>
 
         <Column dataField="title" caption="TÍTULO"  />
         <Column dataField="desc" caption="DESCRIÇÃO" />
         <Column dataField="price" caption="PREÇO" />
-        <Column dataField="cover" caption="CAPA" />        
+        <Column dataField="cover" caption="CAPA" />     
       </DataGrid>
-    </>
+    </div>
   )
 }
 
