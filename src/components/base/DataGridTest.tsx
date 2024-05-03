@@ -12,6 +12,8 @@ import { Item as FormItem } from 'devextreme-react/form';
 import 'devextreme-react/text-area';
 import 'whatwg-fetch';
 import { createStore } from 'devextreme-aspnet-data-nojquery';
+import { Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import ButtonCopyPasteFromExcel from './ButtonCopyPasteFromExcel';
 
 /** Importação do helper de tradução e ativação da tradução da UI */
@@ -118,7 +120,7 @@ const DataGridTest = () => {
       <DataGrid key={forceUpdate} dataSource={dataSource} showBorders={true} repaintChangesOnly={true}>
         <Toolbar>
           <Item>
-            <button onClick={addNewRow}>Add</button>
+            <Button onClick={addNewRow} variant="outlined"><AddIcon /></Button>
           </Item>
           <Item>
             <ButtonCopyPasteFromExcel onDataInserted={onDataInserted} />

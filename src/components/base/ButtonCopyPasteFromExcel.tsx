@@ -91,9 +91,7 @@ const ButtonCopyPasteFromExcel: React.FC<ButtonCopyPasteFromExcelProps> = ({ onD
 
   return (
     <Button aria-label="contentcopy" variant="outlined" color="info" onClick={pasteContent}>
-    {/* <IconButton aria-label="contentcopy" onClick={pasteContent}> */}
       <ContentCopyIcon />
-    {/* </IconButton> */}
     </Button>
   );
 };
