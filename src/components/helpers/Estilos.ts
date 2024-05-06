@@ -34,3 +34,12 @@ export const HeaderOrange = styled.div`
   background-color: #f70 !important;
 }
 `
+
+export const CustomToolBar = styled.div`
+  .custom-toolbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px; /* Ajuste conforme necessário */
+  }
+`

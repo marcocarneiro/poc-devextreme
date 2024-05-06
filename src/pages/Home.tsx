@@ -1,7 +1,7 @@
 //Recursos CSS
 import '../App.css';
 import 'devextreme/dist/css/dx.light.css';
-import { HeaderOrange, BlueDGIcons } from '../components/helpers/Estilos';
+import { HeaderOrange, BlueDGIcons, CustomToolBar } from '../components/helpers/Estilos';
 
 //Componentes
 //import CrudDataGridArray from '../components/base/CrudDataGridArray';
@@ -18,7 +18,9 @@ const Home = () => {
     return(
         <HeaderOrange>
             <BlueDGIcons>
-                <DataGridTest />
+                <CustomToolBar>
+                    <DataGridTest />
+                </CustomToolBar>                
             </BlueDGIcons>             
         </HeaderOrange>                           
     )    
