@@ -40,6 +40,23 @@ export const CustomToolBar = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-    margin: 10px; /* Ajuste conforme necessário */
+    margin: 0;
+  }
+  .custom-toolbar button {
+    background-color: #fff;
+    border-color: #ddd;
+    color: #333;
+    padding: 8px 0;
+    min-width: 40px;
+  }
+  .custom-toolbar button svg {    
+    font-size: 18px;
+  }
+  .custom-toolbar button: hover {
+    background-color: #f5f5f5;
+  }
+  
+  .dx-toolbar-after{
+    margin-right: 50px !important;
   }
 `
